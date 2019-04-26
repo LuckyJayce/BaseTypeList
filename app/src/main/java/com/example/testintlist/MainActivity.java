@@ -2,9 +2,7 @@ package com.example.testintlist;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.LongSparseArray;
-
-import org.apache.poi.util.IntList;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,9 +10,26 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        IntList intList = new IntList(100);
-        intList.add(0);
-        int[] ints = intList.toArray();
-//        LongSparseArray
+        LongList longList = new LongList(20);
+        for (int i = 0; i < 100; i++) {
+            longList.add(i);
+        }
+
+        print(longList);
+
+        longList.remove(0);
+        longList.removeValue(80);
+
+        Log.d("ttt", "value ----------------------" );
+        print(longList);
+
+    }
+
+    private void print(LongList longList){
+        int size = longList.size();
+        for (int i = 0; i < size; i++) {
+            long value = longList.get(i);
+            Log.d("ttt", "value:" + value);
+        }
     }
 }
