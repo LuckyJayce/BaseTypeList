@@ -83,7 +83,7 @@ public class LongList {
      *                                   range (index < 0 || index > size()).
      */
 
-    public void add(final int index, final int value) {
+    public void add(final int index, final long value) {
         if (index > _limit) {
             throw new IndexOutOfBoundsException();
         } else if (index == _limit) {
@@ -109,7 +109,7 @@ public class LongList {
      * method).
      */
 
-    public boolean add(final int value) {
+    public boolean add(final long value) {
         if (_limit == _array.length) {
             growArray(_limit * 2);
         }
@@ -313,7 +313,7 @@ public class LongList {
         return hash;
     }
 
-    public static int longHashCode(long value) {
+    private static int longHashCode(long value) {
         return (int) (value ^ (value >>> 32));
     }
 
@@ -329,7 +329,7 @@ public class LongList {
      * this element.
      */
 
-    public int indexOf(final int o) {
+    public int indexOf(final long o) {
         int rval = 0;
 
         for (; rval < _limit; rval++) {
@@ -365,7 +365,7 @@ public class LongList {
      * this element.
      */
 
-    public int lastIndexOf(final int o) {
+    public int lastIndexOf(final long o) {
         int rval = _limit - 1;
 
         for (; rval >= 0; rval--) {
@@ -481,7 +481,7 @@ public class LongList {
      *                                   range (index < 0 || index >= size()).
      */
 
-    public long set(final int index, final int element) {
+    public long set(final int index, final long element) {
         if (index >= _limit) {
             throw new IndexOutOfBoundsException();
         }
