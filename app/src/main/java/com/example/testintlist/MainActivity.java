@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.shizhefei.collections.basetypelist.LongList;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -22,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d("ttt", "value ----------------------" );
         print(longList);
-
     }
 
     private void print(LongList longList){

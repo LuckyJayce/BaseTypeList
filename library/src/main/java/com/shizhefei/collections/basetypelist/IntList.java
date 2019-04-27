@@ -15,7 +15,7 @@
    limitations under the License.
 ==================================================================== */
 
-package com.example.testintlist;
+package com.shizhefei.collections.basetypelist;
 
 /**
  * A List of int's; as full an implementation of the java.util.List
@@ -29,7 +29,7 @@ package com.example.testintlist;
  * <li> wherever the List interface refers to an Object, substitute
  * int
  * <li> wherever the List interface refers to a Collection or List,
- * substitute LongList
+ * substitute IntList
  * </ul>
  * <p>
  * the mimicry is not perfect, however:
@@ -43,32 +43,32 @@ package com.example.testintlist;
  *
  * @author Marc Johnson
  */
-public class LongList {
-    private long[] _array;
+public class IntList {
+    private int[] _array;
     private int _limit;
     private static final int _default_size = 128;
 
     /**
-     * create an LongList of default size
+     * create an IntList of default size
      */
 
-    public LongList() {
+    public IntList() {
         this(_default_size);
     }
 
-    public LongList(final int initialCapacity) {
-        _array = new long[initialCapacity];
+    public IntList(final int initialCapacity) {
+        _array = new int[initialCapacity];
         _limit = 0;
     }
 
 
     /**
-     * create a copy of an existing LongList
+     * create a copy of an existing IntList
      *
-     * @param list the existing LongList
+     * @param list the existing IntList
      */
 
-    public LongList(final LongList list) {
+    public IntList(final IntList list) {
         this(list._array.length);
         System.arraycopy(list._array, 0, _array, 0, _array.length);
         _limit = list._limit;
@@ -83,7 +83,7 @@ public class LongList {
      *                                   range (index < 0 || index > size()).
      */
 
-    public void add(final int index, final long value) {
+    public void add(final int index, final int value) {
         if (index > _limit) {
             throw new IndexOutOfBoundsException();
         } else if (index == _limit) {
@@ -109,7 +109,7 @@ public class LongList {
      * method).
      */
 
-    public boolean add(final long value) {
+    public boolean add(final int value) {
         if (_limit == _array.length) {
             growArray(_limit * 2);
         }
@@ -131,7 +131,7 @@ public class LongList {
      * @return true if this list changed as a result of the call.
      */
 
-    public boolean addAll(final LongList c) {
+    public boolean addAll(final IntList c) {
         if (c._limit != 0) {
             if ((_limit + c._limit) > _array.length) {
                 growArray(_limit + c._limit);
@@ -162,7 +162,7 @@ public class LongList {
      *                                   range (index < 0 || index > size())
      */
 
-    public boolean addAll(final int index, final LongList c) {
+    public boolean addAll(final int index, final IntList c) {
         if (index > _limit) {
             throw new IndexOutOfBoundsException();
         }
@@ -200,7 +200,7 @@ public class LongList {
      * @return true if this list contains the specified element.
      */
 
-    public boolean contains(final long o) {
+    public boolean contains(final int o) {
         boolean rval = false;
 
         for (int j = 0; !rval && (j < _limit); j++) {
@@ -220,7 +220,7 @@ public class LongList {
      * specified collection.
      */
 
-    public boolean containsAll(final LongList c) {
+    public boolean containsAll(final IntList c) {
         boolean rval = true;
 
         if (this != c) {
@@ -252,7 +252,7 @@ public class LongList {
         boolean rval = this == o;
 
         if (!rval && (o != null) && (o.getClass() == this.getClass())) {
-            LongList other = (LongList) o;
+            IntList other = (IntList) o;
 
             if (other._limit == _limit) {
 
@@ -275,7 +275,7 @@ public class LongList {
      *                                   range (index < 0 || index >= size()).
      */
 
-    public long get(final int index) {
+    public int get(final int index) {
         if (index >= _limit) {
             throw new IndexOutOfBoundsException(
                     index + " not accessible in a list of length " + _limit
@@ -308,13 +308,9 @@ public class LongList {
         int hash = 0;
 
         for (int j = 0; j < _limit; j++) {
-            hash = (31 * hash) + longHashCode(_array[j]);
+            hash = (31 * hash) + _array[j];
         }
         return hash;
-    }
-
-    private static int longHashCode(long value) {
-        return (int) (value ^ (value >>> 32));
     }
 
     /**
@@ -329,7 +325,7 @@ public class LongList {
      * this element.
      */
 
-    public int indexOf(final long o) {
+    public int indexOf(final int o) {
         int rval = 0;
 
         for (; rval < _limit; rval++) {
@@ -365,7 +361,7 @@ public class LongList {
      * this element.
      */
 
-    public int lastIndexOf(final long o) {
+    public int lastIndexOf(final int o) {
         int rval = _limit - 1;
 
         for (; rval >= 0; rval--) {
@@ -388,11 +384,11 @@ public class LongList {
      *                                   range (index < 0 || index >= size()).
      */
 
-    public long remove(final int index) {
+    public int remove(final int index) {
         if (index >= _limit) {
             throw new IndexOutOfBoundsException();
         }
-        long rval = _array[index];
+        int rval = _array[index];
 
         System.arraycopy(_array, index + 1, _array, index, _limit - index);
         _limit--;
@@ -410,7 +406,7 @@ public class LongList {
      * @return true if this list contained the specified element.
      */
 
-    public boolean removeValue(final long o) {
+    public boolean removeValue(final int o) {
         boolean rval = false;
 
         for (int j = 0; !rval && (j < _limit); j++) {
@@ -434,7 +430,7 @@ public class LongList {
      * @return true if this list changed as a result of the call.
      */
 
-    public boolean removeAll(final LongList c) {
+    public boolean removeAll(final IntList c) {
         boolean rval = false;
 
         for (int j = 0; j < c._limit; j++) {
@@ -456,7 +452,7 @@ public class LongList {
      * @return true if this list changed as a result of the call.
      */
 
-    public boolean retainAll(final LongList c) {
+    public boolean retainAll(final IntList c) {
         boolean rval = false;
 
         for (int j = 0; j < _limit; ) {
@@ -481,11 +477,11 @@ public class LongList {
      *                                   range (index < 0 || index >= size()).
      */
 
-    public long set(final int index, final long element) {
+    public int set(final int index, final int element) {
         if (index >= _limit) {
             throw new IndexOutOfBoundsException();
         }
-        long rval = _array[index];
+        int rval = _array[index];
 
         _array[index] = element;
         return rval;
@@ -496,7 +492,7 @@ public class LongList {
      * contains more than Integer.MAX_VALUE elements, returns
      * Integer.MAX_VALUE.
      *
-     * @return the number of elements in this LongList
+     * @return the number of elements in this IntList
      */
 
     public int size() {
@@ -512,8 +508,8 @@ public class LongList {
      * proper sequence.
      */
 
-    public long[] toArray() {
-        long[] rval = new long[_limit];
+    public int[] toArray() {
+        int[] rval = new int[_limit];
 
         System.arraycopy(_array, 0, rval, 0, _limit);
         return rval;
@@ -530,8 +526,8 @@ public class LongList {
      * @return an array containing the elements of this list.
      */
 
-    public long[] toArray(final long[] a) {
-        long[] rval;
+    public int[] toArray(final int[] a) {
+        int[] rval;
 
         if (a.length == _limit) {
             System.arraycopy(_array, 0, a, 0, _limit);
@@ -545,7 +541,7 @@ public class LongList {
     private void growArray(final int new_size) {
         int size = (new_size == _array.length) ? new_size + 1
                 : new_size;
-        long[] new_array = new long[size];
+        int[] new_array = new int[size];
 
         System.arraycopy(_array, 0, new_array, 0, _limit);
         _array = new_array;
